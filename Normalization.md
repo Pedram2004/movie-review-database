@@ -21,7 +21,7 @@
 	- $Prodcution \ ID \rightarrow Genre$
 	- $Prodcution \ ID \rightarrow Revenue$
 	- $Prodcution \ ID \rightarrow Release \ Date$
-	- $Prodcution \ ID \rightarrow IMDB \ Rating$ [^1] <br>
+	- $Prodcution \ ID \rightarrow IMDB \ Rating$ [^1] <br><br>
 	- $Title,\ Release \ Date \rightarrow Production \ ID$
 	- $Title,\ Release \ Date \rightarrow Genre$
 	- $Title,\ Release \ Date \rightarrow Revenue$
@@ -29,7 +29,7 @@
 - ### People :
 	- $Person \ ID \rightarrow Fullname$ <br>
 - ### Company :
-	- $Company \ ID \rightarrow Legal \ Name$<br>
+	- $Company \ ID \rightarrow Legal \ Name$<br><br>
 	- $Legal \ Name \rightarrow Company \ ID$  <br><br> *(The legal and registered name of a production company is very likely unique, however this is not considered in our design)* <br>
 - ### Rating For Movie :
 	- $Rating \ ID \rightarrow Production \ ID$ <br>
