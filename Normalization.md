@@ -26,6 +26,11 @@
 	- $Title,\ Release \ Date \rightarrow Genre$
 	- $Title,\ Release \ Date \rightarrow Revenue$
 	- $Title,\ Release \ Date \rightarrow IMDB \ Rating$ [^1] <br><br> *(Although this particular set of FD's is not considered during the design process, it can be used as one. As it is highly unlikely to have two Productions (movie / series) with the same name and release date)* <br>
+- ### Series' Season :
+	- $Season \ ID \rightarrow Season \ Number$
+	- $Season \ ID \rightarrow Number \ of \ Viewers$ [^1] <br>
+- ### Season in Series :
+	- $Season \ ID \rightarrow Production \ ID$ <br>
 - ### People :
 	- $Person \ ID \rightarrow Fullname$ <br>
 - ### Company :
