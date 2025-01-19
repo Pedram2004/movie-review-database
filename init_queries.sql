@@ -45,8 +45,9 @@ CREATE TABLE Lists (
 	PRIMARY KEY (list_id)
 );
 
+-- Identifier Relation as an intermediary to season, series and movies
 CREATE TABLE Identifier (
-	id INT NOT NULL IDENTITY(1,1),
+	id INT NOT NULL,
 	PRIMARY KEY ([id])
 );
 
@@ -64,6 +65,37 @@ CREATE TABLE Company (
     legal_name VARCHAR(50) NOT NULL,
 	PRIMARY KEY (company_id)
 );
+
+go
+
+CREATE TRIGGER season_identifier_insertion ON Series_Season 
+AFTER INSERT AS
+BEGIN 
+INSERT INTO Identifier (id) 
+SELECT season_id FROM inserted
+END;
+
+CREATE TRIGGER movie_series_identifier_insertion ON Movie_Series
+AFTER INSERT AS
+BEGIN 
+INSERT INTO Identifier (id)
+SELECT production_id FROM inserted
+END;
+
+CREATE TRIGGER season_identifier_deletion ON Series_Season 
+AFTER DELETE AS
+BEGIN 
+DELETE FROM Identifier WHERE id IN
+(SELECT season_id FROM deleted)
+END;
+
+CREATE TRIGGER movie_series_identifier_deletion ON Movie_Series 
+AFTER DELETE AS
+BEGIN 
+DELETE FROM Identifier WHERE id IN
+(SELECT production_id FROM deleted)
+END;
+
 go
 
 -- The relation for Ratings created by the Users
