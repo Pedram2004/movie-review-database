@@ -31,8 +31,8 @@
 - ### Series' Season :
 	- $Season \ ID \rightarrow Season \ Number$
 	- $Season \ ID \rightarrow Number \ of \ Viewers$ [^1] <br>
-- ### Season in Series :
-	- $Season \ ID \rightarrow Production \ ID$ <br>
+- ### Identifier :
+	- $ID \rightarrow ID$<br>
 - ### People :
 	- $Person \ ID \rightarrow Fullname$ <br>
 - ### Company :
@@ -42,10 +42,16 @@
 	- $Rating \ ID \rightarrow Production \ ID$ <br>
 - ### User Created List :
 	- $List \ ID \rightarrow User \ ID$ <br>
+- ### Season Of Series :
+	- $Season \ ID \rightarrow Production \ ID$ <br>
 - ### User Created Rating :
 	- $Rating \ ID \rightarrow Username$ <br>
-- ### Movie Added List :
-	- $List \ ID, \ Date \rightarrow Prodcution \ ID$ <br>
+- ### Identifier Added List :
+	- $List \ ID, \ Date \rightarrow ID$ <br>
+- ### Movie / Series Connecting To Identifier :
+	- $ID \rightarrow Prodcution \ ID$<br>
+- ### Series' Season Connecting To Identifier :
+	- $ID \rightarrow Season \ ID$<br>
 - ### Cast & Crew :
 	- $Production \ ID, \ Role \rightarrow Person \ ID$<br>
 - ### Produced By :

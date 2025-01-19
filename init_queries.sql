@@ -45,6 +45,11 @@ CREATE TABLE Lists (
 	PRIMARY KEY (list_id)
 );
 
+CREATE TABLE Identifier (
+	id INT NOT NULL IDENTITY(1,1),
+	PRIMARY KEY ([id])
+);
+
 -- People Relation
 CREATE TABLE People (
     person_id INT NOT NULL IDENTITY(1,1),
@@ -72,7 +77,7 @@ CREATE TABLE User_Created_Rating (
 );
 
 -- The relation between User and Lists
-CREATE TABLE User_List (
+CREATE TABLE User_Created_List (
     [user_id] INT NOT NULL,
     list_id INT NOT NULL,
 	PRIMARY KEY ([user_id], list_id),
@@ -89,12 +94,28 @@ CREATE TABLE Season_Of_Series (
 
 -- A Season or Movie / Series added to a List
 CREATE TABLE Added_To_List (
-    production_id INT NOT NULL,
+    id INT NOT NULL,
     list_id INT NOT NULL,
     date_added DATETIME NOT NULL, -- DEFAULT CURRENT_TIMESTAMP
-    PRIMARY KEY (production_id, list_id),
-    FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE,
+    PRIMARY KEY (id, list_id),
+    FOREIGN KEY (id) REFERENCES Identifier(id) ON DELETE CASCADE,
     FOREIGN KEY (list_id) REFERENCES Lists(list_id) ON DELETE CASCADE
+);
+
+CREATE TABLE Production_Connect_Identifier (
+	id INT NOT NULL,
+	production_id INT NOT NULL,
+	PRIMARY KEY (id, production_id),
+	FOREIGN KEY (id) REFERENCES Identifier(id) ON DELETE CASCADE,
+	FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE
+);
+
+CREATE TABLE Season_Connect_Identifier (
+	id INT NOT NULL,
+	season_id INT NOT NULL,
+	PRIMARY KEY (id, season_id),
+	FOREIGN KEY (id) REFERENCES Identifier(id) ON DELETE CASCADE,
+	FOREIGN KEY (season_id) REFERENCES Series_Season(season_id) ON DELETE CASCADE
 );
 
 -- which Movie / Series is produced by what company
