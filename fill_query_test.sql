@@ -100,6 +100,247 @@ INSERT INTO Company (legal_name) VALUES
 ('Reveille Productions'),
 ('Syncopy');
 
+
+INSERT INTO User_Created_Rating ([user_id], rating_id, date_created)
+VALUES
+(1, 1, '2023-10-01 10:00:00'),
+(1, 2, '2023-10-02 11:15:00'),
+(3, 3, '2023-10-03 12:30:00'),
+(3, 4, '2023-10-04 13:45:00'),
+(5, 5, '2023-10-05 14:00:00'),
+(5, 6, '2023-10-06 15:20:00'),
+(7, 7, '2023-10-07 16:35:00'),
+(7, 8, '2023-10-08 17:50:00'),
+(9, 9, '2023-10-09 18:05:00'),
+(9, 10, '2023-10-10 19:10:00');
+
+
+INSERT INTO User_Created_List ([user_id], list_id)
+VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(4, 4),
+(5, 5),
+(5, 6),
+(5, 7),
+(8, 8),
+(9, 9),
+(10, 10);
+
+
+INSERT INTO Season_Of_Series (season_id, production_id)
+VALUES
+(1, 2), (2, 2), (3, 2), (4, 2), (5, 2), -- Breaking Bad (production_id = 2) has 5 seasons
+(1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), -- Game of Thrones (production_id = 4) has 8 seasons
+(1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), (7, 6), (8, 6), (9, 6), (10, 6), -- Friends (production_id = 6) has 10 seasons
+(1, 8), (2, 8), (3, 8), (4, 8), -- Stranger Things (production_id = 8) has 4 seasons
+(1, 10), (2, 10), (3, 10), (4, 10), (5, 10), (6, 10), (7, 10), (8, 10), (9, 10); -- The Office (production_id = 10) has 9 seasons
+
+
+INSERT INTO Added_To_List (id, list_id, date_added)
+VALUES
+(1, 1, '2023-10-01 10:00:00'),
+(1, 3, '2023-10-01 10:00:00'),
+(1, 5, '2023-10-01 10:00:00'),
+(2, 2, '2023-10-02 11:15:00'),
+(2, 4, '2023-10-02 11:15:00'),
+(2, 6, '2023-10-02 11:15:00'),
+(3, 3, '2023-10-03 12:30:00'),
+(3, 4, '2023-10-03 12:30:00'),
+(3, 5, '2023-10-03 12:30:00'),
+(4, 4, '2023-10-04 13:45:00'),
+(4, 10, '2023-10-04 13:45:00'),
+(5, 2, '2023-10-05 14:00:00'),
+(5, 6, '2023-10-05 14:00:00'),
+(6, 6, '2023-10-06 15:20:00'),
+(6, 8, '2023-10-06 15:20:00'),
+(7, 7, '2023-10-07 16:35:00'),
+(8, 8, '2023-10-08 17:50:00'),
+(9, 9, '2023-10-09 18:05:00'),
+(10, 10, '2023-10-10 19:10:00');
+
+
+INSERT INTO Identifier (id)
+VALUES
+(1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12), (13), (14), (15), (16), (17);
+
+
+INSERT INTO Production_Connect_Identifier (id, production_id)
+VALUES
+(1, 1), -- Avatar (production_id = 1) mapped to id = 1
+(2, 2), -- Breaking Bad (production_id = 2) mapped to id = 2
+(3, 3), -- The Dark Knight (production_id = 3) mapped to id = 3
+(4, 4), -- Game of Thrones (production_id = 4) mapped to id = 4
+(5, 5), -- Titanic (production_id = 5) mapped to id = 5
+(6, 6), -- Friends (production_id = 6) mapped to id = 6
+(7, 7), -- Avengers: Endgame (production_id = 7) mapped to id = 7
+(8, 8), -- Stranger Things (production_id = 8) mapped to id = 8
+(9, 9), -- The Lord of the Rings: The Return of the King (production_id = 9) mapped to id = 9
+(10, 10), -- The Office (production_id = 10) mapped to id = 10
+(11, 11); -- Inception (production_id = 11) mapped to id = 11
+
+
+INSERT INTO Series_Season (season_number)
+VALUES
+(1), (2), (3), (4), (5), -- Breaking Bad seasons
+(1), (2), (3), (4), (5), (6), (7), (8), -- Game of Thrones seasons
+(1), (2), (3), (4); -- Stranger Things seasons
+
+
+INSERT INTO Season_Connect_Identifier (id, season_id)
+VALUES
+(1, 2),  -- Season 1 of Breaking Bad
+(2, 4),  -- Season 2 of Breaking Bad
+(3, 6),  -- Season 3 of Breaking Bad
+(4, 8),  -- Season 4 of Breaking Bad
+(5, 10), -- Season 5 of Breaking Bad
+(6, 12),  -- Season 1 of Game of Thrones
+(7, 14),  -- Season 2 of Game of Thrones
+(8, 16),  -- Season 3 of Game of Thrones
+(9, 18),  -- Season 4 of Game of Thrones
+(10, 20), -- Season 5 of Game of Thrones
+(11, 22), -- Season 6 of Game of Thrones
+(12, 24), -- Season 7 of Game of Thrones
+(13, 26), -- Season 8 of Game of Thrones
+(14, 28), -- Season 1 of Stranger Things
+(15, 30), -- Season 2 of Stranger Things
+(16, 32), -- Season 3 of Stranger Things
+(17, 34); -- Season 4 of Stranger Things
+
+
+-- Inserting data into Produced_By
+INSERT INTO Produced_By (production_id, company_id)
+VALUES
+-- Avatar (production_id = 1)
+(1, 1),  -- 20th Century Fox
+(1, 2),  -- Lightstorm Entertainment
+-- Breaking Bad (production_id = 2)
+(2, 3),  -- Sony Pictures Television
+-- The Dark Knight (production_id = 3)
+(3, 4),  -- Warner Bros. Pictures
+(3, 6),  -- Legendary Entertainment
+-- Game of Thrones (production_id = 4)
+(4, 7),  -- HBO Entertainment
+-- Titanic (production_id = 5)
+(5, 1),  -- 20th Century Fox
+(5, 8),  -- Paramount Pictures
+-- Friends (production_id = 6)
+(6, 5),  -- Warner Bros. Television
+-- Avengers: Endgame (production_id = 7)
+(7, 9),  -- Marvel Studios
+-- Stranger Things (production_id = 8)
+(8, 10), -- 21 Laps Entertainment
+(8, 11), -- Netflix
+-- The Lord of the Rings: The Return of the King (production_id = 9)
+(9, 12), -- New Line Cinema
+(9, 13), -- WingNut Films
+-- The Office (production_id = 10)
+(10, 14), -- Reveille Productions
+(10, 15), -- Universal Television
+-- Inception (production_id = 11)
+(11, 4),  -- Warner Bros. Pictures
+(11, 6),  -- Legendary Entertainment
+(11, 16); -- Syncopy
+
+
+INSERT INTO Cast_Crew (production_id, person_id, [role])
+VALUES
+-- Avatar (production_id = 1)
+(1, 1, 'actor'),   -- Sam Worthington
+(1, 2, 'actor'),   -- Zoe Saldana
+(1, 3, 'director'),-- James Cameron
+-- Breaking Bad (production_id = 2)
+(2, 4, 'actor'),   -- Bryan Cranston
+(2, 5, 'actor'),   -- Aaron Paul
+(2, 6, 'director'),-- Vince Gilligan
+-- The Dark Knight (production_id = 3)
+(3, 7, 'actor'),   -- Christian Bale
+(3, 8, 'actor'),   -- Heath Ledger
+(3, 9, 'director'),-- Christopher Nolan
+-- Game of Thrones (production_id = 4)
+(4, 10, 'actor'),  -- Emilia Clarke
+(4, 11, 'actor'),  -- Kit Harington
+(4, 12, 'director'),-- David Benioff
+-- Titanic (production_id = 5)
+(5, 13, 'actor'),  -- Leonardo DiCaprio
+(5, 14, 'actor'),  -- Kate Winslet
+(5, 3, 'director'),-- James Cameron
+-- Friends (production_id = 6)
+(6, 15, 'actor'),  -- Jennifer Aniston
+(6, 16, 'actor'),  -- David Schwimmer
+(6, 17, 'director'),-- Kevin S. Bright
+-- Avengers: Endgame (production_id = 7)
+(7, 18, 'actor'),  -- Robert Downey Jr.
+(7, 19, 'actor'),  -- Chris Evans
+(7, 20, 'director'),-- Anthony Russo
+-- Stranger Things (production_id = 8)
+(8, 21, 'actor'),  -- Millie Bobby Brown
+(8, 22, 'actor'),  -- Finn Wolfhard
+(8, 23, 'director'),-- Matt Duffer
+(8, 24, 'director'),-- Ross Duffer
+-- The Lord of the Rings: The Return of the King (production_id = 9)
+(9, 25, 'actor'),  -- Elijah Wood
+(9, 26, 'actor'),  -- Ian McKellen
+(9, 27, 'director'),-- Peter Jackson
+-- The Office (production_id = 10)
+(10, 28, 'actor'), -- Steve Carell
+(10, 29, 'actor'), -- John Krasinski
+(10, 30, 'director'),-- Greg Daniels
+-- Inception (production_id = 11)
+(11, 13, 'actor'), -- Leonardo DiCaprio
+(11, 31, 'actor'), -- Joseph Gordon-Levitt
+(11, 9, 'director');-- Christopher Nolan
+
+
+INSERT INTO Rating_For_Movie (production_id, rating_id)
+VALUES
+-- Avatar (production_id = 1)
+(1, 1),  -- Rating 1
+(1, 2),  -- Rating 2
+(1, 3),  -- Rating 3
+-- Breaking Bad (production_id = 2)
+(2, 4),  -- Rating 4
+(2, 5),  -- Rating 5
+(2, 6),  -- Rating 6
+-- The Dark Knight (production_id = 3)
+(3, 7),  -- Rating 7
+(3, 8),  -- Rating 8
+(3, 9),  -- Rating 9
+-- Game of Thrones (production_id = 4)
+(4, 10), -- Rating 10
+(4, 11), -- Rating 11
+(4, 12), -- Rating 12
+-- Titanic (production_id = 5)
+(5, 13), -- Rating 13
+(5, 14), -- Rating 14
+(5, 15), -- Rating 15
+-- Friends (production_id = 6)
+(6, 16), -- Rating 16
+(6, 17), -- Rating 17
+(6, 18), -- Rating 18
+-- Avengers: Endgame (production_id = 7)
+(7, 19), -- Rating 19
+(7, 20), -- Rating 20
+(7, 21), -- Rating 21
+-- Stranger Things (production_id = 8)
+(8, 22), -- Rating 22
+(8, 23), -- Rating 23
+(8, 24), -- Rating 24
+-- The Lord of the Rings: The Return of the King (production_id = 9)
+(9, 25), -- Rating 25
+(9, 26), -- Rating 26
+(9, 27), -- Rating 27
+-- The Office (production_id = 10)
+(10, 28), -- Rating 28
+(10, 29), -- Rating 29
+(10, 30), -- Rating 30
+-- Inception (production_id = 11)
+(11, 31), -- Rating 31
+(11, 32), -- Rating 32
+(11, 33); -- Rating 33
+
+
 select * from Identifier;
 select * from Series_Season;
 select * from Movie_Series;
