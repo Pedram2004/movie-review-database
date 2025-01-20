@@ -5,7 +5,7 @@ CREATE TABLE [User] (
     email VARCHAR(100) NOT NULL UNIQUE,
     [password] VARCHAR(50) NOT NULL,
     full_name VARCHAR(50),
-    age INT,
+    age INT CHECK (age > 0),
 	PRIMARY KEY ([user_id])
 );
 
@@ -68,6 +68,8 @@ CREATE TABLE Company (
 
 go
 
+--triggers for Identifier Relation
+
 CREATE TRIGGER season_identifier_insertion ON Series_Season 
 AFTER INSERT AS
 BEGIN 
@@ -117,12 +119,34 @@ CREATE TABLE User_Created_List (
     FOREIGN KEY (list_id) REFERENCES Lists(list_id),
 );
 
+-- The relation to determine which Season is for which Series
 CREATE TABLE Season_Of_Series (
 	season_id INT NOT NULL,
-	production_id INT NOT NULL CHECK (production_id IN (SELECT MS.production_id FROM Movie_Series AS MS WHERE MS.[type] = 'Series')),
+	production_id INT NOT NULL,
 	PRIMARY KEY (season_id, production_id),
 	FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE 
 );
+
+-- The trigger to check the production_id is for a Series
+CREATE TRIGGER is_season_of_series ON Season_Of_Series
+AFTER INSERT AS
+BEGIN 
+BEGIN TRANSACTION;
+    IF EXISTS (
+        SELECT 1
+        FROM inserted
+        WHERE (SELECT [type] FROM Movie_Series AS MS WHERE inserted.production_id = MS.production_id) = 'Movie'
+    )
+    BEGIN
+        ROLLBACK TRANSACTION;
+
+        RAISERROR ('The Season has been related to a Movie', 19, 1);
+        RETURN;
+    END
+    COMMIT TRANSACTION;
+END;
+
+
 
 -- A Season or Movie / Series added to a List
 CREATE TABLE Added_To_List (
@@ -159,7 +183,7 @@ CREATE TABLE Produced_By (
     FOREIGN KEY (company_id) REFERENCES Company(company_id) ON DELETE CASCADE
 );
 
--- whcih Person is participiated in which Movie / Series
+-- which Person is participiated in which Movie / Series
 CREATE TABLE Cast_Crew (
     production_id INT NOT NULL,
     person_id INT NOT NULL,
