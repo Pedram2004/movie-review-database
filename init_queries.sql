@@ -45,6 +45,25 @@ CREATE TABLE Lists (
 	PRIMARY KEY (list_id)
 );
 
+-- trigger to isnure a download or viewed list is private
+CREATE TRIGGER private_list ON Lists
+AFTER INSERT AS
+BEGIN 
+BEGIN TRANSACTION
+IF EXISTS (
+        SELECT 1
+        FROM inserted
+        WHERE inserted.[type] IN ('download', 'viewed') AND inserted.access = 'public'
+    )
+    BEGIN
+        ROLLBACK TRANSACTION;
+
+        RAISERROR ('The download or viewed list is public', 18, 1);
+        RETURN;
+    END
+    COMMIT TRANSACTION;
+END;
+
 -- Identifier Relation as an intermediary to season, series and movies
 CREATE TABLE Identifier (
 	id INT NOT NULL,
@@ -140,13 +159,11 @@ BEGIN TRANSACTION;
     BEGIN
         ROLLBACK TRANSACTION;
 
-        RAISERROR ('The Season has been related to a Movie', 19, 1);
+        RAISERROR ('The Season has been related to a Movie', 18, 1);
         RETURN;
     END
     COMMIT TRANSACTION;
 END;
-
-
 
 -- A Season or Movie / Series added to a List
 CREATE TABLE Added_To_List (
