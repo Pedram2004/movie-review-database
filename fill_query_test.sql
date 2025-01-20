@@ -138,75 +138,11 @@ VALUES
 (1, 10), (2, 10), (3, 10), (4, 10), (5, 10), (6, 10), (7, 10), (8, 10), (9, 10); -- The Office (production_id = 10) has 9 seasons
 
 
-INSERT INTO Added_To_List (id, list_id, date_added)
-VALUES
-(1, 1, '2023-10-01 10:00:00'),
-(1, 3, '2023-10-01 10:00:00'),
-(1, 5, '2023-10-01 10:00:00'),
-(2, 2, '2023-10-02 11:15:00'),
-(2, 4, '2023-10-02 11:15:00'),
-(2, 6, '2023-10-02 11:15:00'),
-(3, 3, '2023-10-03 12:30:00'),
-(3, 4, '2023-10-03 12:30:00'),
-(3, 5, '2023-10-03 12:30:00'),
-(4, 4, '2023-10-04 13:45:00'),
-(4, 10, '2023-10-04 13:45:00'),
-(5, 2, '2023-10-05 14:00:00'),
-(5, 6, '2023-10-05 14:00:00'),
-(6, 6, '2023-10-06 15:20:00'),
-(6, 8, '2023-10-06 15:20:00'),
-(7, 7, '2023-10-07 16:35:00'),
-(8, 8, '2023-10-08 17:50:00'),
-(9, 9, '2023-10-09 18:05:00'),
-(10, 10, '2023-10-10 19:10:00');
-
-
-INSERT INTO Identifier (id)
-VALUES
-(1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12), (13), (14), (15), (16), (17);
-
-
-INSERT INTO Production_Connect_Identifier (id, production_id)
-VALUES
-(1, 1), -- Avatar (production_id = 1) mapped to id = 1
-(2, 2), -- Breaking Bad (production_id = 2) mapped to id = 2
-(3, 3), -- The Dark Knight (production_id = 3) mapped to id = 3
-(4, 4), -- Game of Thrones (production_id = 4) mapped to id = 4
-(5, 5), -- Titanic (production_id = 5) mapped to id = 5
-(6, 6), -- Friends (production_id = 6) mapped to id = 6
-(7, 7), -- Avengers: Endgame (production_id = 7) mapped to id = 7
-(8, 8), -- Stranger Things (production_id = 8) mapped to id = 8
-(9, 9), -- The Lord of the Rings: The Return of the King (production_id = 9) mapped to id = 9
-(10, 10), -- The Office (production_id = 10) mapped to id = 10
-(11, 11); -- Inception (production_id = 11) mapped to id = 11
-
-
 INSERT INTO Series_Season (season_number)
 VALUES
 (1), (2), (3), (4), (5), -- Breaking Bad seasons
 (1), (2), (3), (4), (5), (6), (7), (8), -- Game of Thrones seasons
 (1), (2), (3), (4); -- Stranger Things seasons
-
-
-INSERT INTO Season_Connect_Identifier (id, season_id)
-VALUES
-(1, 2),  -- Season 1 of Breaking Bad
-(2, 4),  -- Season 2 of Breaking Bad
-(3, 6),  -- Season 3 of Breaking Bad
-(4, 8),  -- Season 4 of Breaking Bad
-(5, 10), -- Season 5 of Breaking Bad
-(6, 12),  -- Season 1 of Game of Thrones
-(7, 14),  -- Season 2 of Game of Thrones
-(8, 16),  -- Season 3 of Game of Thrones
-(9, 18),  -- Season 4 of Game of Thrones
-(10, 20), -- Season 5 of Game of Thrones
-(11, 22), -- Season 6 of Game of Thrones
-(12, 24), -- Season 7 of Game of Thrones
-(13, 26), -- Season 8 of Game of Thrones
-(14, 28), -- Season 1 of Stranger Things
-(15, 30), -- Season 2 of Stranger Things
-(16, 32), -- Season 3 of Stranger Things
-(17, 34); -- Season 4 of Stranger Things
 
 
 -- Inserting data into Produced_By
