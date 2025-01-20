@@ -14,7 +14,7 @@ CREATE TABLE Movie_Series (
     production_id INT IDENTITY(1,2),
     title VARCHAR(100) NOT NULL,
     genre VARCHAR(20) NOT NULL,
-    revenue INT,
+    revenue BIGINT,
     release_date DATE,
 	[type] VARCHAR(6) NOT NULL CHECK ([type] IN ('Movie', 'Series')),
     imdb_rating NUMERIC(3, 1) CHECK (imdb_rating BETWEEN 0 AND 10),
