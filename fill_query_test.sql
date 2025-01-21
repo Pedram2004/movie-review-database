@@ -39,6 +39,8 @@ VALUES
 (8.5, 'Great storyline and acting.'),
 (7.8, 'Enjoyable but predictable.'),
 (9.0, 'One of the best series ever made.'),
+(3.6, 'Underwhelming and struggles to maintain interest.'),
+(2.8, 'A weak effort with unconvincing characters and a muddled plot.'),
 (6.5, 'Decent, but could have been better.'),
 (8.9, 'Kept me on the edge of my seat.'),
 (7.2, 'Good, but not great.'),
@@ -54,7 +56,18 @@ VALUES
 (8.3, NULL),
 (6.7, 'Could have been shorter.'),
 (9.4, 'A modern classic!'),
-(7.0, 'Good for a one-time watch.');
+(7.0, 'Good for a one-time watch.'),
+(10.0, 'Absolutely phenomenal! A cinematic triumph.'),
+(9.4, NULL),
+(8.8, 'A gripping story with excellent visuals, though slightly predictable.'),
+(7.9, 'Highly enjoyable, but pacing issues hold it back from greatness.'),
+(6.3, 'Decent entertainment, though lacks originality in parts.'),
+(5.5, NULL),
+(4.7, 'A mixed bag. Great concept but fails in execution.'),
+(1.3, 'Terrible from start to finish. Avoid at all costs.'),
+(9.2, 'An emotionally resonant and visually stunning experience.'),
+(8.1, 'A solid film with strong acting but an uneven script.'),
+(7.2, NULL);;
 
 INSERT INTO Lists (list_name, access, [type]) VALUES
 ('My Downloaded Movies', 'private', 'download'),
@@ -73,7 +86,7 @@ INSERT INTO People (full_name) VALUES
 ('Bryan Cranston'), ('Aaron Paul'), ('Vince Gilligan'), -- Breaking Bad
 ('Christian Bale'), ('Heath Ledger'), ('Christopher Nolan'), -- The Dark Knight
 ('Emilia Clarke'), ('Kit Harington'), ('David Benioff'), -- Game of Thrones
-('Leonardo DiCaprio'), ('Kate Winslet'), ('James Cameron'), -- Titanic
+('Leonardo DiCaprio'), ('Kate Winslet'), -- Titanic
 ('Jennifer Aniston'), ('David Schwimmer'), ('Kevin S. Bright'), -- Friends
 ('Robert Downey Jr.'), ('Chris Evans'), ('Anthony Russo'), -- Avengers : End Game
 ('Millie Bobby Brown'), ('Finn Wolfhard'), ('Matt Duffer'), ('Ross Duffer'), -- Stranger Things
@@ -131,18 +144,11 @@ VALUES
 
 INSERT INTO Season_Of_Series (season_id, production_id)
 VALUES
-(1, 2), (2, 2), (3, 2), (4, 2), (5, 2), -- Breaking Bad (production_id = 2) has 5 seasons
-(1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), -- Game of Thrones (production_id = 4) has 8 seasons
-(1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), (7, 6), (8, 6), (9, 6), (10, 6), -- Friends (production_id = 6) has 10 seasons
-(1, 8), (2, 8), (3, 8), (4, 8), -- Stranger Things (production_id = 8) has 4 seasons
-(1, 10), (2, 10), (3, 10), (4, 10), (5, 10), (6, 10), (7, 10), (8, 10), (9, 10); -- The Office (production_id = 10) has 9 seasons
-
-
-INSERT INTO Series_Season (season_number)
-VALUES
-(1), (2), (3), (4), (5), -- Breaking Bad seasons
-(1), (2), (3), (4), (5), (6), (7), (8), -- Game of Thrones seasons
-(1), (2), (3), (4); -- Stranger Things seasons
+(2, 3), (4, 3), (6, 3), (8, 3), (10, 3), -- Breaking Bad (production_id = 3) has 5 seasons
+(12, 7), (14, 7), (16, 7), (18, 7), (20, 7), (22, 7), (24, 7), (26, 7), -- Game of Thrones (production_id = 7) has 8 seasons
+(28, 11), (30, 11), (32, 11), (34, 11), (36, 11), (38, 11), (40, 11), (42, 11), (44, 11), (46, 11), -- Friends (production_id = 11) has 10 seasons
+(48, 15), (50, 15), (52, 15), (54, 15), -- Stranger Things (production_id = 15) has 4 seasons
+(56, 19), (58, 19), (60, 19), (62, 19), (64, 19), (66, 19), (68, 19), (70, 19), (72, 19); -- The Office (production_id = 19) has 9 seasons
 
 
 -- Inserting data into Produced_By
@@ -151,33 +157,33 @@ VALUES
 -- Avatar (production_id = 1)
 (1, 1),  -- 20th Century Fox
 (1, 2),  -- Lightstorm Entertainment
--- Breaking Bad (production_id = 2)
-(2, 3),  -- Sony Pictures Television
--- The Dark Knight (production_id = 3)
-(3, 4),  -- Warner Bros. Pictures
-(3, 6),  -- Legendary Entertainment
--- Game of Thrones (production_id = 4)
-(4, 7),  -- HBO Entertainment
--- Titanic (production_id = 5)
-(5, 1),  -- 20th Century Fox
-(5, 8),  -- Paramount Pictures
--- Friends (production_id = 6)
-(6, 5),  -- Warner Bros. Television
--- Avengers: Endgame (production_id = 7)
-(7, 9),  -- Marvel Studios
--- Stranger Things (production_id = 8)
-(8, 10), -- 21 Laps Entertainment
-(8, 11), -- Netflix
--- The Lord of the Rings: The Return of the King (production_id = 9)
-(9, 12), -- New Line Cinema
-(9, 13), -- WingNut Films
--- The Office (production_id = 10)
-(10, 14), -- Reveille Productions
-(10, 15), -- Universal Television
--- Inception (production_id = 11)
-(11, 4),  -- Warner Bros. Pictures
-(11, 6),  -- Legendary Entertainment
-(11, 16); -- Syncopy
+-- Breaking Bad (production_id = 3)
+(3, 3),  -- Sony Pictures Television
+-- The Dark Knight (production_id = 5)
+(5, 4),  -- Warner Bros. Pictures
+(5, 6),  -- Legendary Entertainment
+-- Game of Thrones (production_id = 7)
+(7, 7),  -- HBO Entertainment
+-- Titanic (production_id = 9)
+(9, 1),  -- 20th Century Fox
+(9, 8),  -- Paramount Pictures
+-- Friends (production_id = 11)
+(11, 5),  -- Warner Bros. Television
+-- Avengers: Endgame (production_id = 13)
+(13, 9),  -- Marvel Studios
+-- Stranger Things (production_id = 15)
+(15, 10), -- 21 Laps Entertainment
+(15, 11), -- Netflix
+-- The Lord of the Rings: The Return of the King (production_id = 17)
+(17, 12), -- New Line Cinema
+(17, 13), -- WingNut Films
+-- The Office (production_id = 19)
+(19, 14), -- Reveille Productions
+(19, 15), -- Universal Television
+-- Inception (production_id = 21)
+(21, 4),  -- Warner Bros. Pictures
+(21, 6),  -- Legendary Entertainment
+(21, 16); -- Syncopy
 
 
 INSERT INTO Cast_Crew (production_id, person_id, [role])
@@ -186,47 +192,47 @@ VALUES
 (1, 1, 'actor'),   -- Sam Worthington
 (1, 2, 'actor'),   -- Zoe Saldana
 (1, 3, 'director'),-- James Cameron
--- Breaking Bad (production_id = 2)
-(2, 4, 'actor'),   -- Bryan Cranston
-(2, 5, 'actor'),   -- Aaron Paul
-(2, 6, 'director'),-- Vince Gilligan
--- The Dark Knight (production_id = 3)
-(3, 7, 'actor'),   -- Christian Bale
-(3, 8, 'actor'),   -- Heath Ledger
-(3, 9, 'director'),-- Christopher Nolan
--- Game of Thrones (production_id = 4)
-(4, 10, 'actor'),  -- Emilia Clarke
-(4, 11, 'actor'),  -- Kit Harington
-(4, 12, 'director'),-- David Benioff
--- Titanic (production_id = 5)
-(5, 13, 'actor'),  -- Leonardo DiCaprio
-(5, 14, 'actor'),  -- Kate Winslet
-(5, 3, 'director'),-- James Cameron
--- Friends (production_id = 6)
-(6, 15, 'actor'),  -- Jennifer Aniston
-(6, 16, 'actor'),  -- David Schwimmer
-(6, 17, 'director'),-- Kevin S. Bright
--- Avengers: Endgame (production_id = 7)
-(7, 18, 'actor'),  -- Robert Downey Jr.
-(7, 19, 'actor'),  -- Chris Evans
-(7, 20, 'director'),-- Anthony Russo
--- Stranger Things (production_id = 8)
-(8, 21, 'actor'),  -- Millie Bobby Brown
-(8, 22, 'actor'),  -- Finn Wolfhard
-(8, 23, 'director'),-- Matt Duffer
-(8, 24, 'director'),-- Ross Duffer
--- The Lord of the Rings: The Return of the King (production_id = 9)
-(9, 25, 'actor'),  -- Elijah Wood
-(9, 26, 'actor'),  -- Ian McKellen
-(9, 27, 'director'),-- Peter Jackson
--- The Office (production_id = 10)
-(10, 28, 'actor'), -- Steve Carell
-(10, 29, 'actor'), -- John Krasinski
-(10, 30, 'director'),-- Greg Daniels
--- Inception (production_id = 11)
-(11, 13, 'actor'), -- Leonardo DiCaprio
-(11, 31, 'actor'), -- Joseph Gordon-Levitt
-(11, 9, 'director');-- Christopher Nolan
+-- Breaking Bad (production_id = 3)
+(3, 4, 'actor'),   -- Bryan Cranston
+(3, 5, 'actor'),   -- Aaron Paul
+(3, 6, 'director'),-- Vince Gilligan
+-- The Dark Knight (production_id = 5)
+(5, 7, 'actor'),   -- Christian Bale
+(5, 8, 'actor'),   -- Heath Ledger
+(5, 9, 'director'),-- Christopher Nolan
+-- Game of Thrones (production_id = 7)
+(7, 10, 'actor'),  -- Emilia Clarke
+(7, 11, 'actor'),  -- Kit Harington
+(7, 12, 'director'),-- David Benioff
+-- Titanic (production_id = 9)
+(9, 13, 'actor'),  -- Leonardo DiCaprio
+(9, 14, 'actor'),  -- Kate Winslet
+(9, 3, 'director'),-- James Cameron
+-- Friends (production_id = 11)
+(11, 15, 'actor'),  -- Jennifer Aniston
+(11, 16, 'actor'),  -- David Schwimmer
+(11, 17, 'director'),-- Kevin S. Bright
+-- Avengers: Endgame (production_id = 13)
+(13, 18, 'actor'),  -- Robert Downey Jr.
+(13, 19, 'actor'),  -- Chris Evans
+(13, 20, 'director'),-- Anthony Russo
+-- Stranger Things (production_id = 15)
+(15, 21, 'actor'),  -- Millie Bobby Brown
+(15, 22, 'actor'),  -- Finn Wolfhard
+(15, 23, 'director'),-- Matt Duffer
+(15, 24, 'director'),-- Ross Duffer
+-- The Lord of the Rings: The Return of the King (production_id = 17)
+(17, 25, 'actor'),  -- Elijah Wood
+(17, 26, 'actor'),  -- Ian McKellen
+(17, 27, 'director'),-- Peter Jackson
+-- The Office (production_id = 19)
+(19, 28, 'actor'), -- Steve Carell
+(19, 29, 'actor'), -- John Krasinski
+(19, 30, 'director'),-- Greg Daniels
+-- Inception (production_id = 21)
+(21, 13, 'actor'), -- Leonardo DiCaprio
+(21, 31, 'actor'), -- Joseph Gordon-Levitt
+(21, 9, 'director');-- Christopher Nolan
 
 
 INSERT INTO Rating_For_Movie (production_id, rating_id)
@@ -235,46 +241,46 @@ VALUES
 (1, 1),  -- Rating 1
 (1, 2),  -- Rating 2
 (1, 3),  -- Rating 3
--- Breaking Bad (production_id = 2)
-(2, 4),  -- Rating 4
-(2, 5),  -- Rating 5
-(2, 6),  -- Rating 6
--- The Dark Knight (production_id = 3)
-(3, 7),  -- Rating 7
-(3, 8),  -- Rating 8
-(3, 9),  -- Rating 9
--- Game of Thrones (production_id = 4)
-(4, 10), -- Rating 10
-(4, 11), -- Rating 11
-(4, 12), -- Rating 12
--- Titanic (production_id = 5)
-(5, 13), -- Rating 13
-(5, 14), -- Rating 14
-(5, 15), -- Rating 15
--- Friends (production_id = 6)
-(6, 16), -- Rating 16
-(6, 17), -- Rating 17
-(6, 18), -- Rating 18
--- Avengers: Endgame (production_id = 7)
-(7, 19), -- Rating 19
-(7, 20), -- Rating 20
-(7, 21), -- Rating 21
--- Stranger Things (production_id = 8)
-(8, 22), -- Rating 22
-(8, 23), -- Rating 23
-(8, 24), -- Rating 24
--- The Lord of the Rings: The Return of the King (production_id = 9)
-(9, 25), -- Rating 25
-(9, 26), -- Rating 26
-(9, 27), -- Rating 27
--- The Office (production_id = 10)
-(10, 28), -- Rating 28
-(10, 29), -- Rating 29
-(10, 30), -- Rating 30
--- Inception (production_id = 11)
-(11, 31), -- Rating 31
-(11, 32), -- Rating 32
-(11, 33); -- Rating 33
+-- Breaking Bad (production_id = 3)
+(3, 4),  -- Rating 4
+(3, 5),  -- Rating 5
+(3, 6),  -- Rating 6
+-- The Dark Knight (production_id = 5)
+(5, 7),  -- Rating 7
+(5, 8),  -- Rating 8
+(5, 9),  -- Rating 9
+-- Game of Thrones (production_id = 7)
+(7, 10), -- Rating 10
+(7, 11), -- Rating 11
+(7, 12), -- Rating 12
+-- Titanic (production_id = 9)
+(9, 13), -- Rating 13
+(9, 14), -- Rating 14
+(9, 15), -- Rating 15
+-- Friends (production_id = 11)
+(11, 16), -- Rating 16
+(11, 17), -- Rating 17
+(11, 18), -- Rating 18
+-- Avengers: Endgame (production_id = 13)
+(13, 19), -- Rating 19
+(13, 20), -- Rating 20
+(13, 21), -- Rating 21
+-- Stranger Things (production_id = 15)
+(15, 22), -- Rating 22
+(15, 23), -- Rating 23
+(15, 24), -- Rating 24
+-- The Lord of the Rings: The Return of the King (production_id = 17)
+(17, 25), -- Rating 25
+(17, 26), -- Rating 26
+(17, 27), -- Rating 27
+-- The Office (production_id = 19)
+(19, 28), -- Rating 28
+(19, 29), -- Rating 29
+(19, 30), -- Rating 30
+-- Inception (production_id = 21)
+(21, 31), -- Rating 31
+(21, 32), -- Rating 32
+(21, 33); -- Rating 33
 
 
 select * from Identifier;
