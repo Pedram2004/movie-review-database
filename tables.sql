@@ -18,14 +18,8 @@ CREATE TABLE Movie_Series (
     release_date DATE NOT NULL,
     [type] VARCHAR(6) NOT NULL CHECK ([type] IN ('Movie', 'Series')),
     imdb_rating NUMERIC(3, 1) CHECK (imdb_rating BETWEEN 0 AND 10),
-    PRIMARY KEY (production_id)
-);
-
--- Part Relation
-CREATE TABLE Part (
-    part_id INT NOT NULL IDENTITY(1,1),
     season_number INT,
-    PRIMARY KEY (part_id)
+    PRIMARY KEY (production_id)
 );
 
 -- Rating Relation
@@ -80,22 +74,13 @@ CREATE TABLE User_Created_List (
     FOREIGN KEY (list_id) REFERENCES Lists(list_id),
 );
 
--- The relation to determine which Season is for which Series
-CREATE TABLE Part_Of_Productions (
-    part_id INT NOT NULL,
-    production_id INT NOT NULL,
-    PRIMARY KEY (part_id, production_id),
-    FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE,
-    FOREIGN KEY (part_id) REFERENCES Part(part_id) ON DELETE CASCADE
-);
-
 -- A Season or Movie / Series added to a List
 CREATE TABLE Added_To_List (
-    id INT NOT NULL,
+    production_id INT NOT NULL,
     list_id INT NOT NULL,
     date_added DATETIME NOT NULL, -- DEFAULT CURRENT_TIMESTAMP
-    PRIMARY KEY (id, list_id),
-    FOREIGN KEY (id) REFERENCES Part(part_id) ON DELETE CASCADE,
+    PRIMARY KEY (production_id, list_id),
+    FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE,
     FOREIGN KEY (list_id) REFERENCES Lists(list_id) ON DELETE CASCADE
 );
 
