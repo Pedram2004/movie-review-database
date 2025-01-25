@@ -5,12 +5,12 @@ CREATE TABLE [User] (
     email VARCHAR(100) NOT NULL UNIQUE,
     [password] VARCHAR(50) NOT NULL,
     full_name VARCHAR(50),
-    age INT CHECK (age > 0),
+    age INT NOT NULL CHECK (age > 0),
     PRIMARY KEY ([user_id])
 );
 
 -- Movie / Series Relation
-CREATE TABLE Movie_Series (
+CREATE TABLE Prodcution (
     production_id INT IDENTITY(1,1),
     title VARCHAR(100) NOT NULL,
     genre VARCHAR(20) NOT NULL,
@@ -18,7 +18,6 @@ CREATE TABLE Movie_Series (
     release_date DATE NOT NULL,
     [type] VARCHAR(6) NOT NULL CHECK ([type] IN ('Movie', 'Series')),
     imdb_rating NUMERIC(3, 1) CHECK (imdb_rating BETWEEN 0 AND 10),
-    season_number INT,
     PRIMARY KEY (production_id)
 );
 
@@ -26,12 +25,12 @@ CREATE TABLE Movie_Series (
 CREATE TABLE Rating (
     rating_id INT NOT NULL IDENTITY(1,1),
     rating_value Numeric(3, 1) NOT NULL CHECK (rating_value BETWEEN 0 AND 10),
-    REVIEW_text VARCHAR(1000),
+    review_text VARCHAR(100),
     PRIMARY KEY (rating_id)
 );
 
 -- Lists Relation
-CREATE TABLE Lists (
+CREATE TABLE List (
     list_id INT NOT NULL IDENTITY(1,1),
     list_name VARCHAR(50) NOT NULL,
     access VARCHAR(7) NOT NULL CHECK (access in ('private', 'public')),
@@ -42,7 +41,7 @@ CREATE TABLE Lists (
 -- People Relation
 CREATE TABLE People (
     person_id INT NOT NULL IDENTITY(1,1),
-    full_name VARCHAR(100) NOT NULL,
+    full_name VARCHAR(50) NOT NULL,
     PRIMARY KEY (person_id)
 );
 
@@ -51,6 +50,14 @@ CREATE TABLE Company (
     company_id INT NOT NULL IDENTITY(1,1),
     legal_name VARCHAR(50) NOT NULL,
     PRIMARY KEY (company_id)
+);
+
+-- Weak Entity Part related to Production
+CREATE TABLE Part (
+	production_id INT NOT NULL,
+	part_number INT NOT NULL,
+	PRIMARY KEY (production_id, part_number),
+	FOREIGN KEY (production_id) REFERENCES Production(production_id) ON DELETE CASCADE
 );
 
 go
@@ -71,17 +78,18 @@ CREATE TABLE User_Created_List (
     list_id INT NOT NULL,
     PRIMARY KEY ([user_id], list_id),
     FOREIGN KEY ([user_id]) REFERENCES [User]([user_id]),
-    FOREIGN KEY (list_id) REFERENCES Lists(list_id),
+    FOREIGN KEY (list_id) REFERENCES List(list_id),
 );
 
 -- A Season or Movie / Series added to a List
 CREATE TABLE Added_To_List (
     production_id INT NOT NULL,
+	part_number INT NOT NULL,
     list_id INT NOT NULL,
     date_added DATETIME NOT NULL, -- DEFAULT CURRENT_TIMESTAMP
-    PRIMARY KEY (production_id, list_id),
-    FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE,
-    FOREIGN KEY (list_id) REFERENCES Lists(list_id) ON DELETE CASCADE
+    PRIMARY KEY (production_id, part_number, list_id),
+    FOREIGN KEY (production_id, part_number) REFERENCES Part(production_id, part_number) ON DELETE CASCADE,
+    FOREIGN KEY (list_id) REFERENCES List(list_id) ON DELETE CASCADE
 );
 
 -- which Movie / Series is produced by what company
@@ -89,7 +97,7 @@ CREATE TABLE Produced_By (
     production_id INT NOT NULL,
     company_id INT NOT NULL,
     PRIMARY KEY (production_id, company_id),
-    FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE,
+    FOREIGN KEY (production_id) REFERENCES Production(production_id) ON DELETE CASCADE,
     FOREIGN KEY (company_id) REFERENCES Company(company_id) ON DELETE CASCADE
 );
 
@@ -99,7 +107,7 @@ CREATE TABLE Cast_Crew (
     person_id INT NOT NULL,
     [role] VARCHAR(8) NOT NULL	CHECK ([role] IN ('director', 'actor')),
     PRIMARY KEY (production_id, person_id),
-    FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE,
+    FOREIGN KEY (production_id) REFERENCES Production(production_id) ON DELETE CASCADE,
     FOREIGN KEY (person_id) REFERENCES People(person_id) ON DELETE CASCADE
 );
 
@@ -108,6 +116,8 @@ CREATE TABLE Rating_For_Movie (
     production_id INT NOT NULL,
     rating_id INT NOT NULL,
     PRIMARY KEY (production_id, rating_id),
-    FOREIGN KEY (production_id) REFERENCES Movie_Series(production_id) ON DELETE CASCADE,
+    FOREIGN KEY (production_id) REFERENCES Production(production_id) ON DELETE CASCADE,
     FOREIGN KEY (rating_id) REFERENCES Rating(rating_id) ON DELETE CASCADE
 );
+
+
