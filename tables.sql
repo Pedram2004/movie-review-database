@@ -54,10 +54,10 @@ CREATE TABLE Company (
 
 -- Weak Entity Part related to Production
 CREATE TABLE Part (
-	production_id INT NOT NULL,
-	part_number INT NOT NULL,
-	PRIMARY KEY (production_id, part_number),
-	FOREIGN KEY (production_id) REFERENCES Production(production_id) ON DELETE CASCADE
+    production_id INT NOT NULL,
+    part_number INT NOT NULL,
+    PRIMARY KEY (production_id, part_number),
+    FOREIGN KEY (production_id) REFERENCES Production(production_id) ON DELETE CASCADE
 );
 
 go
@@ -84,7 +84,7 @@ CREATE TABLE User_Created_List (
 -- A Season or Movie / Series added to a List
 CREATE TABLE Added_To_List (
     production_id INT NOT NULL,
-	part_number INT NOT NULL,
+    part_number INT NOT NULL,
     list_id INT NOT NULL,
     date_added DATETIME NOT NULL, -- DEFAULT CURRENT_TIMESTAMP
     PRIMARY KEY (production_id, part_number, list_id),
