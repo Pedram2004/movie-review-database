@@ -25,11 +25,13 @@ CREATE TABLE Production (
 CREATE TABLE Rating (
     rating_id INT NOT NULL IDENTITY(1,1),
 	[user_id] INT NOT NULL,
+	production_id INT NOT NULL,
 	date_created DATETIME NOT NULL, 
     rating_value Numeric(3, 1) NOT NULL CHECK (rating_value BETWEEN 0 AND 10),
     review_text VARCHAR(100),
     PRIMARY KEY (rating_id),
-	FOREIGN KEY ([user_id]) REFERENCES [User]([user_id])
+	FOREIGN KEY ([user_id]) REFERENCES [User]([user_id]),
+	FOREIGN KEY (production_id) REFERENCES Production(production_id)
 );
 
 -- Lists Relation
@@ -40,7 +42,7 @@ CREATE TABLE List (
     access VARCHAR(7) NOT NULL CHECK (access in ('private', 'public')),
     [type] VARCHAR(8) NOT NULL CHECK ([type] in ('download', 'viewed', 'watch')),
     PRIMARY KEY (list_id),
-	FOREIGN KEY ([user_id]) REFERENCES [User]([user_id])
+	FOREIGN KEY ([user_id]) REFERENCES [User]([user_id]) ON DELETE CASCADE
 );
 
 -- People Relation
@@ -95,15 +97,6 @@ CREATE TABLE Cast_Crew (
     PRIMARY KEY (production_id, person_id),
     FOREIGN KEY (production_id) REFERENCES Production(production_id) ON DELETE CASCADE,
     FOREIGN KEY (person_id) REFERENCES People(person_id) ON DELETE CASCADE
-);
-
--- The relation to identify each rating is for which movie
-CREATE TABLE Rating_For_Movie (
-    production_id INT NOT NULL,
-    rating_id INT NOT NULL,
-    PRIMARY KEY (production_id, rating_id),
-    FOREIGN KEY (production_id) REFERENCES Production(production_id) ON DELETE CASCADE,
-    FOREIGN KEY (rating_id) REFERENCES Rating(rating_id) ON DELETE CASCADE
 );
 
 go
