@@ -10,7 +10,7 @@ CREATE TABLE [User] (
 );
 
 -- Movie / Series Relation
-CREATE TABLE Prodcution (
+CREATE TABLE Production (
     production_id INT IDENTITY(1,1),
     title VARCHAR(100) NOT NULL,
     genre VARCHAR(20) NOT NULL,
