@@ -9,7 +9,7 @@ CREATE TABLE [User] (
     PRIMARY KEY ([user_id])
 );
 
--- Movie / Series Relation
+-- Production Relation
 CREATE TABLE Production (
     production_id INT IDENTITY(1,1),
     title VARCHAR(100) NOT NULL,

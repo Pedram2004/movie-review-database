@@ -24,8 +24,8 @@ BEGIN
     END
 END;
 
--- Automatic Adjustments
 
+-- Automatic Adjustments
 CREATE TRIGGER auto_insert_part ON Production 
 AFTER INSERT
 AS
