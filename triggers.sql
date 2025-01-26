@@ -15,8 +15,9 @@ CREATE TRIGGER unique_download_viewed ON List
 AFTER INSERT, UPDATE
 AS
 BEGIN
-    IF EXISTS (SELECT UCL.[user_id], inserted.[type] FROM User_Created_List AS UCL INNER JOIN inserted ON (UCL.list_id = inserted.list_id)
-    WHERE inserted.[type] != 'watch' GROUP BY UCL.[user_id], inserted.[type] HAVING COUNT(*) > 1)
+    IF EXISTS (SELECT inserted.[type] FROM inserted
+    WHERE inserted.[type] != 'watch' 
+	GROUP BY inserted.[user_id], inserted.[type] HAVING COUNT(*) > 1)
     BEGIN	    
 	ROLLBACK TRANSACTION;
 	THROW 50110, 'Only One Download or Viewed List Allowed per User', 0;
