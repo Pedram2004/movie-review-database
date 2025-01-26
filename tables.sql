@@ -24,18 +24,23 @@ CREATE TABLE Prodcution (
 -- Rating Relation
 CREATE TABLE Rating (
     rating_id INT NOT NULL IDENTITY(1,1),
+	[user_id] INT NOT NULL,
+	date_created DATETIME NOT NULL, 
     rating_value Numeric(3, 1) NOT NULL CHECK (rating_value BETWEEN 0 AND 10),
     review_text VARCHAR(100),
-    PRIMARY KEY (rating_id)
+    PRIMARY KEY (rating_id),
+	FOREIGN KEY ([user_id]) REFERENCES [User]([user_id])
 );
 
 -- Lists Relation
 CREATE TABLE List (
     list_id INT NOT NULL IDENTITY(1,1),
+	[user_id] INT NOT NULL,
     list_name VARCHAR(50) NOT NULL,
     access VARCHAR(7) NOT NULL CHECK (access in ('private', 'public')),
     [type] VARCHAR(8) NOT NULL CHECK ([type] in ('download', 'viewed', 'watch')),
-    PRIMARY KEY (list_id)
+    PRIMARY KEY (list_id),
+	FOREIGN KEY ([user_id]) REFERENCES [User]([user_id])
 );
 
 -- People Relation
@@ -61,25 +66,6 @@ CREATE TABLE Part (
 );
 
 go
-
--- The relation for Ratings created by the Users
-CREATE TABLE User_Created_Rating (
-    [user_id] INT NOT NULL,
-    rating_id INT NOT NULL,
-    date_created DATETIME NOT NULL, -- DEFAULT CURRENT_TIMESTAMP
-    PRIMARY KEY ([user_id], rating_id),
-    FOREIGN KEY ([user_id]) REFERENCES [User]([user_id]) ON DELETE CASCADE,
-    FOREIGN KEY (rating_id) REFERENCES Rating(rating_id) ON DELETE CASCADE
-);
-
--- The relation between User and Lists
-CREATE TABLE User_Created_List (
-    [user_id] INT NOT NULL,
-    list_id INT NOT NULL,
-    PRIMARY KEY ([user_id], list_id),
-    FOREIGN KEY ([user_id]) REFERENCES [User]([user_id]),
-    FOREIGN KEY (list_id) REFERENCES List(list_id),
-);
 
 -- A Season or Movie / Series added to a List
 CREATE TABLE Added_To_List (
@@ -120,4 +106,4 @@ CREATE TABLE Rating_For_Movie (
     FOREIGN KEY (rating_id) REFERENCES Rating(rating_id) ON DELETE CASCADE
 );
 
-
+go
