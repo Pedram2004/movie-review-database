@@ -60,8 +60,35 @@ SELECT title FROM
 INTERSECT 
 (SELECT * FROM @User_List AS UL WHERE UL.[type] = 'download')) AS IUL) AS DIUL;
 
--- 12
 
+-- 12
+WITH DP (production_id, title, date_added) AS 
+(SELECT DISTINCT(P.production_id), P.title, AL.date_added FROM 
+((List AS L INNER JOIN Added_To_List AS AL ON (L.list_id = AL.list_id))
+INNER JOIN Production AS P ON (P.production_id = AL.production_id)) 
+WHERE L.[type] = 'download' AND L.[user_id] = @specific_user_id)
+
+SELECT title FROM DP 
+WHERE DATEDIFF(dayofyear, date_added, CURRENT_TIMESTAMP) <= 30;
+
+
+
+-- 13
+DECLARE @director_name VARCHAR (50) = '';
+
+DECLARE @director_id TABLE (person_id INT NOT NULL) = 
+(SELECT P.person_id FROM People WHERE People.full_name = @director_name); 
+
+
+SELECT C.legal_name
+(SELECT Company_Count.company_id
+(SELECT PB.company_id, COUNT(PB.company_id) AS cooperation_count FROM 
+((Cast_Crew AS CC INNER JOIN Production AS P ON (CC.production_id = P.production_id))
+INNER JOIN Produced_By AS PB ON (PB.production_id = P.production_id))
+WHERE CC.[role] = 'director' AND CC.person_id IN @director_name
+GROUP BY PB.company_id) AS Company_Count
+WHERE Company_Count.cooperation_count > 3) AS VC 
+INNER JOIN Company as C ON (C.company_id = VC.company_id);
 
 -- 14 
 SELECT title FROM
@@ -71,8 +98,27 @@ EXCEPT
 (SELECT UL.production_id, UL.title FROM @User_List AS UL WHERE UL.[type] = 'viewed' AND UL.genre = 'Action')) AS IUL) AS AP;
 
 
---15
+-- 15
 SELECT genre, SUM(revenue) FROM Production GROUP BY genre;
 
 
---16
+-- 16
+SELECT title FROM
+(SELECT DISTINCT (P.production_id), P.title FROM 
+((SELECT R.production_id, COUNT(R.rating_id) AS rating_count FROM Rating AS R
+GROUP BY R.production_id WHERE R.rating_value > 8) AS Movie_Count
+INNER JOIN Production AS P ON (P.production_id = Movie_Count.production_id)) 
+WHERE Movie_Count.rating_count > 50) AS Movie_Name;
+
+
+-- 17
+SELECT Acting_Drama.full_name FROM
+(SELECT DISTINCT(P.person_id), P.full_name FROM 
+(People AS P INNER JOIN Cast_Crew AS CC ON (P.person_id = CC.person_id)) 
+INNER JOIN Production AS Pr ON (CC.production_id = Pr.production_id) 
+WHERE Pr.genre = 'Drama' AND CC.[role] = 'actor') AS Acting_Drama; 
+
+-- 18
+DECLARE @change_production_id INT = 0;
+
+UPDATE Production AS P SET P.imdb_rating = 12 WHERE P.production_id = @change_production_id; 
