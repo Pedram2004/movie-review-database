@@ -41,3 +41,38 @@ Production AS P GROUP BY P.genre
 ORDER BY genre_count DESC;
 
 -- 11
+DECLARE @User_List TABLE (
+production_id INT NOT NULL,
+title VARCHAR(100) NOT NULL,
+genre VARCHAR(20) NOT NULL,
+[type] VARCHAR(6) NOT NULL
+);
+
+INSERT INTO @User_List (production_id, title, genre, [type]) 
+(SELECT P.production_id, P.title, P.genre, L.[type] 
+FROM ((List as L INNER JOIN Added_To_List AS AL ON (L.list_id = AL.list_id)) 
+INNER JOIN Production AS P ON (P.production_id = AL.production_id)) WHERE
+L.[user_id] = @specific_user_id)
+
+SELECT title FROM
+(SELECT DISTINCT (IUL.production_id), IUL.title FROM 
+((SELECT * FROM @User_List AS UL WHERE UL.[type] = 'viewed')
+INTERSECT 
+(SELECT * FROM @User_List AS UL WHERE UL.[type] = 'download')) AS IUL) AS DIUL;
+
+-- 12
+
+
+-- 14 
+SELECT title FROM
+(SELECT DISTINCT (IUL.production_id), IUL.title FROM 
+((SELECT P.production_id, P.title FROM Production AS P WHERE P.genre = 'Action')
+EXCEPT
+(SELECT UL.production_id, UL.title FROM @User_List AS UL WHERE UL.[type] = 'viewed' AND UL.genre = 'Action')) AS IUL) AS AP;
+
+
+--15
+SELECT genre, SUM(revenue) FROM Production GROUP BY genre;
+
+
+--16
